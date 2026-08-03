@@ -26,7 +26,6 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Custom Theme Classes */
     body.theme-neon { background-color: #0f0717; color: #f3e8ff; }
     body.theme-neon .card-bg { background-color: #1a0b2e; border-color: #3b0764; }
     body.theme-neon .accent-btn { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
@@ -50,42 +49,38 @@
         <h1 class="text-xl font-bold tracking-wide">AnimeSub <span class="text-purple-400">Pro</span></h1>
       </div>
       
-      <!-- Theme Switcher & Status -->
       <div class="flex items-center gap-3">
         <label for="themeSelect" class="text-xs font-semibold opacity-80">Theme:</label>
         <select id="themeSelect" onchange="changeTheme(this.value)" class="bg-black/30 border border-white/20 rounded px-2 py-1 text-sm focus:outline-none">
-          <option value="theme-neon"> Neon Purple</option>
-          <option value="theme-dark"> Deep Dark</option>
+          <option value="theme-neon">💜 Neon Purple</option>
+          <option value="theme-dark">🌙 Deep Dark</option>
           <option value="theme-light">☀️ Clean Light</option>
         </select>
       </div>
     </div>
   </header>
 
-  <!-- Top Ad Banner Placeholder -->
+  <!-- Top Ad Banner -->
   <div class="max-w-7xl mx-auto w-full px-4 mt-4">
     <div class="w-full h-20 border border-dashed border-white/20 rounded-lg flex items-center justify-center text-xs opacity-50 card-bg">
       [ Top Ad Banner Space - Google AdSense 728x90 ]
     </div>
   </div>
 
-  <!-- Main Content Area -->
+  <!-- Main Content -->
   <main class="max-w-7xl mx-auto w-full p-4 grid grid-cols-1 lg:grid-cols-4 gap-6 flex-grow">
     
-    <!-- Sidebar Controls (1 Col) -->
+    <!-- Sidebar -->
     <aside class="lg:col-span-1 space-y-6">
       
-      <!-- API Key Box -->
       <div class="card-bg border rounded-xl p-4 shadow-lg space-y-3">
         <div class="flex items-center gap-2 font-semibold text-sm">
           <i data-lucide="key" class="w-4 h-4 text-purple-400"></i>
           <span>Gemini API Setup</span>
         </div>
-        <input type="password" id="apiKey" placeholder="Paste Gemini API Key..." class="w-full bg-black/20 border border-white/10 rounded px-3 py-2 text-sm focus:outline-none focus:border-purple-500" />
-        <p class="text-[11px] opacity-60">Your key is never stored on servers. It stays in your browser.</p>
+        <input type="password" id="apiKey" placeholder="Paste Valid API Key..." class="w-full bg-black/20 border border-white/10 rounded px-3 py-2 text-sm focus:outline-none focus:border-purple-500" />
       </div>
 
-      <!-- Settings Box -->
       <div class="card-bg border rounded-xl p-4 shadow-lg space-y-4">
         <div class="flex items-center gap-2 font-semibold text-sm">
           <i data-lucide="sliders" class="w-4 h-4 text-purple-400"></i>
@@ -104,49 +99,46 @@
         <div>
           <label class="text-xs block mb-1 opacity-80">Model Selected</label>
           <select id="modelSelect" class="w-full bg-black/20 border border-white/10 rounded px-3 py-2 text-sm">
-            <option value="gemini-2.5-flash">Gemini 2.5 Flash (Fastest)</option>
-            <option value="gemini-1.5-flash">Gemini 1.5 Flash (Fallback)</option>
+            <option value="gemini-1.5-flash">Gemini 1.5 Flash (Stable & Fast)</option>
+            <option value="gemini-1.5-pro">Gemini 1.5 Pro (Advanced)</option>
           </select>
         </div>
       </div>
 
-      <!-- Sidebar Ad Banner -->
+      <!-- Sidebar Ad -->
       <div class="h-64 border border-dashed border-white/20 rounded-xl flex items-center justify-center text-xs opacity-50 card-bg">
         [ Sidebar Ad - 300x250 ]
       </div>
 
     </aside>
 
-    <!-- Main Workspace (3 Cols) -->
+    <!-- Main Workspace -->
     <section class="lg:col-span-3 space-y-6">
       
-      <!-- File Upload Box -->
       <div class="card-bg border border-dashed border-purple-500/40 rounded-xl p-8 text-center relative hover:border-purple-400 transition-colors">
-        <input type="file" id="srtInput" accept=".srt" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="handleFileUpload(event)" />
+        <input type="file" id="srtInput" accept=".srt,.vtt,.txt" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="handleFileUpload(event)" />
         <div class="flex flex-col items-center gap-2">
           <i data-lucide="upload-cloud" class="w-10 h-10 text-purple-400 animate-bounce"></i>
-          <p class="font-semibold text-base" id="fileNameDisplay">Click or Drag & Drop .SRT File Here</p>
-          <p class="text-xs opacity-60">Supports standard anime & movie subtitle files</p>
+          <p class="font-semibold text-base" id="fileNameDisplay">Click or Drop Subtitle File Here</p>
+          <p class="text-xs opacity-60">Auto-cleans WEBVTT formats to standard SRT</p>
         </div>
       </div>
 
-      <!-- Live Dual Preview -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label class="text-xs font-semibold block mb-2 opacity-80 flex items-center gap-1">
             <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Original Subtitles
           </label>
-          <textarea id="originalText" readonly placeholder="Original SRT content will appear here..." class="w-full h-64 bg-black/20 border border-white/10 rounded-lg p-3 text-xs font-mono resize-none focus:outline-none"></textarea>
+          <textarea id="originalText" readonly placeholder="Original content..." class="w-full h-64 bg-black/20 border border-white/10 rounded-lg p-3 text-xs font-mono resize-none focus:outline-none"></textarea>
         </div>
         <div>
           <label class="text-xs font-semibold block mb-2 opacity-80 flex items-center gap-1">
             <i data-lucide="languages" class="w-3.5 h-3.5 text-purple-400"></i> Translated Subtitles
           </label>
-          <textarea id="translatedText" placeholder="Translated Output will appear here live..." class="w-full h-64 bg-black/20 border border-white/10 rounded-lg p-3 text-xs font-mono resize-none focus:outline-none"></textarea>
+          <textarea id="translatedText" placeholder="Translation output live..." class="w-full h-64 bg-black/20 border border-white/10 rounded-lg p-3 text-xs font-mono resize-none focus:outline-none"></textarea>
         </div>
       </div>
 
-      <!-- Actions & Progress -->
       <div class="card-bg border rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="w-full sm:w-1/2 space-y-1">
           <div class="flex justify-between text-xs opacity-80">
@@ -159,7 +151,7 @@
         </div>
 
         <div class="flex gap-3 w-full sm:w-auto">
-          <button onclick="startTranslation()" class="accent-btn flex-1 sm:flex-none px-6 py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 shadow-lg hover:opacity-90 transition-opacity">
+          <button id="translateBtn" onclick="startTranslation()" class="accent-btn flex-1 sm:flex-none px-6 py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 shadow-lg hover:opacity-90 transition-opacity">
             <i data-lucide="play" class="w-4 h-4"></i> Translate Now
           </button>
           <button onclick="downloadSRT()" id="downloadBtn" disabled class="bg-gray-700 text-gray-400 flex-1 sm:flex-none px-6 py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 cursor-not-allowed">
@@ -172,10 +164,9 @@
 
   </main>
 
-   <!-- JS Logic -->
+  <!-- Complete JS Logic -->
   <script>
     lucide.createIcons();
-
     let loadedSRTContent = "";
 
     function changeTheme(themeName) {
@@ -191,7 +182,7 @@
       reader.onload = function(e) {
         let rawText = e.target.result;
         
-        // Auto-clean WEBVTT header and fix timestamps format (. to ,)
+        // Auto-clean WEBVTT header and standardize timestamps
         rawText = rawText.replace(/^WEBVTT.*?\n\n/gi, '');
         rawText = rawText.replace(/(\d{2}:\d{2}:\d{2})\.(\d{3})/g, '$1,$2');
         
@@ -201,7 +192,6 @@
       reader.readAsText(file);
     }
 
-    // Safe chunking mechanism (20 blocks per batch)
     function chunkSRT(srtText, chunkSize = 20) {
       const blocks = srtText.trim().split(/\n\s*\n/);
       const chunks = [];
@@ -229,10 +219,14 @@
 
       const chunks = chunkSRT(loadedSRTContent, 20);
       const outputBox = document.getElementById('translatedText');
-      outputBox.value = "";
-      
+      const translateBtn = document.getElementById('translateBtn');
+      const dlBtn = document.getElementById('downloadBtn');
       const progressBar = document.getElementById('progressBar');
       const progressPercent = document.getElementById('progressPercent');
+
+      outputBox.value = "";
+      translateBtn.disabled = true;
+      translateBtn.style.opacity = "0.5";
 
       for (let i = 0; i < chunks.length; i++) {
         const prompt = `You are an expert subtitle translator for Anime and Movies.
@@ -242,7 +236,7 @@ STRICT RULES:
 1. NEVER alter, remove, or change any block numbers or timestamps (e.g. 00:01:20,000 --> 00:01:23,000).
 2. Keep anime honorifics intact if applicable (e.g. San, Kun, Sama, Sensei).
 3. Do not merge lines. Keep 1:1 translation.
-4. Output ONLY the translated valid subtitle format without code blocks, intros, or explanations.
+4. Output ONLY the translated valid subtitle format without markdown formatting, intros, or explanations.
 
 Subtitle Content:
 ${chunks[i]}`;
@@ -259,16 +253,20 @@ ${chunks[i]}`;
           const data = await response.json();
 
           if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
-            let translatedChunk = data.candidates[0].content.parts[0].text.replace(/```srt|```vtt|```/g, '').trim();
+            let translatedChunk = data.candidates[0].content.parts[0].text.replace(/```srt|```vtt|```/gi, '').trim();
             outputBox.value += (outputBox.value ? "\n\n" : "") + translatedChunk;
           } else {
             console.error("API Error Response:", data);
-            alert(`Batch ${i + 1} Error: API key ya rate limit ka masla hai. Message: ${data.error?.message || 'Blocked'}`);
+            alert(`Batch ${i + 1} Error: API Key ka masla hai ya quota khatam ho gaya. Message: ${data.error?.message || 'Blocked'}`);
+            translateBtn.disabled = false;
+            translateBtn.style.opacity = "1";
             return;
           }
         } catch (err) {
           console.error("Fetch Error:", err);
-          alert(`Network Error in batch ${i + 1}`);
+          alert(`Network Error in batch ${i + 1}. Internet check karo.`);
+          translateBtn.disabled = false;
+          translateBtn.style.opacity = "1";
           return;
         }
 
@@ -276,75 +274,16 @@ ${chunks[i]}`;
         progressBar.style.width = `${percent}%`;
         progressPercent.innerText = `${percent}%`;
 
-        await delay(1500);
+        // Wait to prevent Rate Limiting
+        await delay(2000);
       }
 
-      const dlBtn = document.getElementById('downloadBtn');
+      translateBtn.disabled = false;
+      translateBtn.style.opacity = "1";
       dlBtn.disabled = false;
       dlBtn.className = "accent-btn flex-1 sm:flex-none px-6 py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg";
+      
       alert("Translation Complete! Ab aap file download kar sakte hain.");
-    }
-
-    function downloadSRT() {
-      const content = document.getElementById('translatedText').value;
-      if (!content) return;
-
-      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'translated_anime_sub.srt';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-  </script>
-(let i = 0; i < chunks.length; i++) {
-        const prompt = `You are an expert subtitle translator for Anime and Movies.
-Translate the following SRT file chunk into ${targetLang}.
-
-STRICT RULES:
-1. NEVER alter, remove, or change any block numbers or timestamps (e.g. 00:01:20,000 --> 00:01:23,000).
-2. Keep anime honorifics intact if applicable (e.g. San, Kun, Sama, Sensei).
-3. Do not merge lines. Keep 1:1 translation.
-4. Output ONLY the translated valid SRT format without code blocks, intros, or explanations.
-
-SRT Content:
-${chunks[i]}`;
-
-        try {
-          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${selectedModel}:generateContent?key=${apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              contents: [{ parts: [{ text: prompt }] }]
-            })
-          });
-
-          const data = await response.json();
-          if (data.candidates && data.candidates[0].content.parts[0].text) {
-            let translatedChunk = data.candidates[0].content.parts[0].text.replace(/```srt|```/g, '').trim();
-            outputBox.value += (outputBox.value ? "\n\n" : "") + translatedChunk;
-          } else {
-            console.error("API Error Response:", data);
-            alert(`Error processing batch ${i+1}. Check Console.`);
-          }
-        } catch (err) {
-          console.error("Fetch Error:", err);
-          alert(`Network/API error in batch ${i+1}`);
-          return;
-        }
-
-        // Update Progress Bar
-        const percent = Math.round(((i + 1) / chunks.length) * 100);
-        progressBar.style.width = `${percent}%`;
-        progressPercent.innerText = `${percent}%`;
-      }
-
-      // Unlock Download
-      const dlBtn = document.getElementById('downloadBtn');
-      dlBtn.disabled = false;
-      dlBtn.className = "accent-btn flex-1 sm:flex-none px-6 py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg";
     }
 
     function downloadSRT() {
@@ -363,4 +302,3 @@ ${chunks[i]}`;
   </script>
 </body>
 </html>
-
