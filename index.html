@@ -33,7 +33,7 @@
 
         <div>
           <label class="text-xs block mb-1 opacity-80">Model ID (Exact Name)</label>
-          <input type="text" id="modelInput" value="gemini-3.1-flash" class="w-full bg-black/20 border border-white/10 rounded px-3 py-2 text-sm" placeholder="e.g. gemini-3.6-pro" />
+          <input type="text" id="modelInput" value="gemini-1.5-flash" class="w-full bg-black/20 border border-white/10 rounded px-3 py-2 text-sm" placeholder="e.g. gemini-1.5-flash" />
           <p class="text-[10px] opacity-50 mt-1">Type model name exactly as in your console</p>
         </div>
 
@@ -102,13 +102,13 @@
       
       for (let i = 0; i < chunks.length; i++) {
         try {
-          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+          const res = await fetch(`https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${apiKey}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ contents: [{ parts: [{ text: `Translate to ${lang}. Keep format perfect.\n${chunks[i]}` }] }] })
           });
           const data = await res.json();
-          if (data.candidates) {
+          if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
             outputBox.value += (outputBox.value ? "\n\n" : "") + data.candidates[0].content.parts[0].text.replace(/```/g, '');
             document.getElementById('progressBar').style.width = `${((i+1)/chunks.length)*100}%`;
           } else {
